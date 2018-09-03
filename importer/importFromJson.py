@@ -5,7 +5,7 @@ import string
 from datetime import datetime
 from py2neo import *
 from connector.neo4j import query_neo4j
-from neo4j.v1 import ResultError
+from neo4j.v1.exceptions import ResultError
 
 config = configparser.ConfigParser()
 config.read("config.ini")

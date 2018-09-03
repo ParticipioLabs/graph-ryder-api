@@ -7,7 +7,7 @@ from flask_restful import Resource, reqparse
 from importer.importFromJson import ImportFromJson
 from importer.importFromDiscourse import ImportFromDiscourse
 from routes.utils import makeResponse
-from neo4j.v1 import ResultError
+from neo4j.v1.exceptions import ResultError
 from connector import neo4j
 import configparser
 config = configparser.ConfigParser()

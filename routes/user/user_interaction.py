@@ -1,6 +1,6 @@
 import uuid
 from flask_restful import Resource
-from neo4j.v1 import ResultError
+from neo4j.v1.exceptions import ResultError
 from connector import neo4j
 from routes.utils import addargs, makeResponse
 from graphtulip.createtlp import CreateTlp
