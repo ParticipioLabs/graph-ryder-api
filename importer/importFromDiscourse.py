@@ -180,7 +180,7 @@ class ImportFromDiscourse(object):
         index_post = 0
         # create all elements
         for comment_id in post_json['post_stream']['stream']:
-            #print(str(len(post_json['post_stream']['stream'])) +' : '+str(i)+' '+str(comment_id))
+            # print(str(len(post_json['post_stream']['stream'])) +' : '+str(i)+' '+str(comment_id))
             if index_post >= len(post_json['post_stream']['posts']):
             # if comment resume is unavailable (not one of the first 20 posts)
                 comment_url = config['importer_discourse']['abs_path']+config['importer_discourse']['posts_rel_path']+str(comment_id)+".json?api_key="+config['importer_discourse']['admin_api_key']+"&api_username="+config['importer_discourse']['admin_api_username']
