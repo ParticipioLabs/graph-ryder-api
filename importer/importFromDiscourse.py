@@ -91,10 +91,11 @@ class ImportFromDiscourse(object):
         page_val = 0
         while Continue:
             user_url = config['importer_discourse']['abs_path']+config['importer_discourse']['users_rel_path']+".json?api_key="+config['importer_discourse']['admin_api_key']+"&api_username="+config['importer_discourse']['admin_api_username']+"&per_page=5000&page="+str(page_val)
+            headers = {'User-Agent': config['importer_discourse']['user_agent'], 'Accept': 'application/json'}
             not_ok = True
             while not_ok:
                 try:
-                    user_req = requests.get(user_url)
+                    user_req = requests.get(user_url, headers=headers)
                 except:
                     print('request problem on user page '+str(page_val))
                     continue
@@ -369,7 +370,12 @@ class ImportFromDiscourse(object):
             for tag in tag_json:
                 # create tag if not existing
                 if not(tag['id'] in self.existing_elements['tags']):
-                    if not(tag['name'].lower() in self.tags):
+                    name = [name['name'] for name in tag['names'] if name['locale'] == 'en']
+                    if name == []:
+                        continue
+                    else:
+                        tag['name'] = name[0]
+                    if not (tag['name'].lower() in self.tags):
                         self.createTag(tag['id'], tag['name'].lower())
                         self.map_tag_to_tag[tag['id']] = tag['id']
                         self.tags[tag['name'].lower()] = tag['id']
